@@ -26,7 +26,7 @@ class Linkedin:
                     self.driver.find_element("id","password").send_keys(config.password)
                     time.sleep(2)
                     self.driver.find_element("xpath",'//button[@type="submit"]').click()
-                    time.sleep(30)
+                    time.sleep(5)
                 except:
                     utils.prRed("❌ Couldn't log in Linkedin by using Chrome. Please check your Linkedin credentials on config files line 7 and 8.")
 
@@ -45,7 +45,11 @@ class Linkedin:
                 self.driver.add_cookie(cookie)
 
     def saveCookies(self):
-        pickle.dump(self.driver.get_cookies() , open(self.cookies_path,"wb"))
+        # Verifica se o diretório existe, se não, cria o diretório
+        os.makedirs(os.path.dirname(self.cookies_path), exist_ok=True)
+        # Salva os cookies
+        pickle.dump(self.driver.get_cookies(), open(self.cookies_path, "wb"))
+
     
     def isLoggedIn(self):
         self.driver.get('https://www.linkedin.com/feed')
@@ -211,6 +215,7 @@ class Linkedin:
 
         textToWrite = str(count) + " | " + jobTitle +" | " + jobDetail + jobLocation
         return textToWrite
+
 
     def easyApplyButton(self):
         try:
