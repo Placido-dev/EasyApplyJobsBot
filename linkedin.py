@@ -47,7 +47,7 @@ class Linkedin:
     def saveCookies(self):
         # Verifica se o diretório existe, se não, cria o diretório
         os.makedirs(os.path.dirname(self.cookies_path), exist_ok=True)
-        # Salva os cookies
+        # Salvar
         pickle.dump(self.driver.get_cookies(), open(self.cookies_path, "wb"))
 
     
